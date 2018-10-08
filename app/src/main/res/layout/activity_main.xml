@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textImportanceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="importance:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textImportance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/textImportanceLabel"
+        app:layout_constraintStart_toEndOf="@id/textImportanceLabel"
+        app:layout_constraintTop_toTopOf="@id/textImportanceLabel"
+        tools:text="default" />
+
+    <TextView
+        android:id="@+id/textShouldVibrateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="shouldVibrate:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textImportanceLabel" />
+
+    <TextView
+        android:id="@+id/textShouldVibrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/textShouldVibrateLabel"
+        app:layout_constraintStart_toEndOf="@id/textShouldVibrateLabel"
+        app:layout_constraintTop_toTopOf="@id/textShouldVibrateLabel"
+        tools:text="false" />
+
+    <TextView
+        android:id="@+id/textLightsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="shouldShowLights:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textShouldVibrateLabel" />
+
+    <TextView
+        android:id="@+id/textLights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/textLightsLabel"
+        app:layout_constraintStart_toEndOf="@id/textLightsLabel"
+        app:layout_constraintTop_toTopOf="@id/textLightsLabel"
+        tools:text="false" />
+
+    <TextView
+        android:id="@+id/textVibrateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="vibrate: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textLightsLabel" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupVibrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/radioVibrateDefault"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/textVibrateLabel"
+        app:layout_constraintStart_toEndOf="@id/textVibrateLabel"
+        app:layout_constraintTop_toTopOf="@id/textVibrateLabel">
+
+        <RadioButton
+            android:id="@+id/radioVibrateDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="default" />
+
+        <RadioButton
+            android:id="@+id/radioVibrateOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="off" />
+
+        <RadioButton
+            android:id="@+id/radioVibrateOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="on" />
+
+    </RadioGroup>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabDoIt"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_notification"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabPlus"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fabDoIt" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabMinus"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fabPlus" />
+
+</android.support.constraint.ConstraintLayout>
