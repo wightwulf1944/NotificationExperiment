@@ -1,22 +1,13 @@
 package i.am.shiro.notificationexperiment;
 
-import android.app.NotificationChannel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.IdRes;
 
-import java.util.UUID;
-
 public class MainModel extends ViewModel {
 
     private MutableLiveData<String> importanceData = new MutableLiveData<>();
-
-    private MutableLiveData<String> shouldVibrateData = new MutableLiveData<>();
-
-    private MutableLiveData<String> shouldShowLightsData = new MutableLiveData<>();
-
-    private NotificationChannel channel;
 
     private NotificationImportance importance;
 
@@ -24,23 +15,24 @@ public class MainModel extends ViewModel {
 
     private boolean vibrateEnabled;
 
+    private boolean lightsDefined;
+
+    private boolean lightsEnabled;
+
     public MainModel() {
         vibrateDefined = false;
-        updateImportance(NotificationImportance.DEFAULT);
-        updateNotificationChannel();
+        setImportance(NotificationImportance.DEFAULT);
     }
 
     void onIncreaseClick() {
         if (importance.hasHigher()) {
-            updateImportance(importance.higher());
-            updateNotificationChannel();
+            setImportance(importance.higher());
         }
     }
 
     void onDecreaseClick() {
         if (importance.hasLower()) {
-            updateImportance(importance.lower());
-            updateNotificationChannel();
+            setImportance(importance.lower());
         }
     }
 
@@ -54,36 +46,46 @@ public class MainModel extends ViewModel {
                 vibrateEnabled = true;
                 break;
         }
-        updateNotificationChannel();
+    }
+
+    void onRadioLightsChanged(@IdRes int id) {
+        lightsDefined = id != R.id.radioLightsDefault;
+        switch (id) {
+            case R.id.radioLightsOff:
+                lightsEnabled = false;
+                break;
+            case R.id.radioLightsOn:
+                lightsEnabled = true;
+                break;
+        }
     }
 
     LiveData<String> getImportanceData() {
         return importanceData;
     }
 
-    MutableLiveData<String> getShouldVibrateData() {
-        return shouldVibrateData;
+    NotificationImportance getImportance() {
+        return importance;
     }
 
-    MutableLiveData<String> getShouldShowLightsData() {
-        return shouldShowLightsData;
+    boolean isVibrateDefined() {
+        return vibrateDefined;
     }
 
-    public NotificationChannel getChannel() {
-        return channel;
+    boolean isVibrateEnabled() {
+        return vibrateEnabled;
     }
 
-    private void updateImportance(NotificationImportance importance) {
+    boolean isLightsDefined() {
+        return lightsDefined;
+    }
+
+    boolean isLightsEnabled() {
+        return lightsEnabled;
+    }
+
+    private void setImportance(NotificationImportance importance) {
         this.importance = importance;
         importanceData.setValue(importance.toString());
-    }
-
-    private void updateNotificationChannel() {
-        String id = UUID.randomUUID().toString();
-        String name = "Test Channel";
-        channel = new NotificationChannel(id, name, importance.toInt());
-        if (vibrateDefined) channel.enableVibration(vibrateEnabled);
-        shouldVibrateData.setValue(String.valueOf(channel.shouldVibrate()));
-        shouldShowLightsData.setValue(String.valueOf(channel.shouldShowLights()));
     }
 }

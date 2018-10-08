@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity {
 
     private MainModel viewModel;
@@ -25,12 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textImportance = findViewById(R.id.textImportance);
 
-        TextView textVibrate = findViewById(R.id.textShouldVibrate);
-
-        TextView textLights = findViewById(R.id.textLights);
-
         RadioGroup radioGroupVibrate = findViewById(R.id.radioGroupVibrate);
         radioGroupVibrate.setOnCheckedChangeListener((group, checkedId) -> viewModel.onRadioVibrateChanged(checkedId));
+
+        RadioGroup radioGroupLights = findViewById(R.id.radioGroupLights);
+        radioGroupLights.setOnCheckedChangeListener((group, checkedId) -> viewModel.onRadioLightsChanged(checkedId));
 
         View fabMinus = findViewById(R.id.fabMinus);
         fabMinus.setOnClickListener(v -> viewModel.onDecreaseClick());
@@ -42,15 +43,17 @@ public class MainActivity extends AppCompatActivity {
         fabDoIt.setOnClickListener(v -> doIt());
 
         viewModel.getImportanceData().observe(this, textImportance::setText);
-        viewModel.getShouldVibrateData().observe(this, textVibrate::setText);
-        viewModel.getShouldShowLightsData().observe(this, textLights::setText);
     }
 
     private void doIt() {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         if (notificationManager == null) throw new NullPointerException();
 
-        NotificationChannel channel = viewModel.getChannel();
+        String id = UUID.randomUUID().toString();
+        String name = "Test Channel";
+        NotificationChannel channel = new NotificationChannel(id, name, viewModel.getImportance().toInt());
+        if (viewModel.isVibrateDefined()) channel.enableVibration(viewModel.isVibrateEnabled());
+        if (viewModel.isLightsDefined()) channel.enableLights(viewModel.isLightsEnabled());
         notificationManager.createNotificationChannel(channel);
 
         Notification notification = new NotificationCompat.Builder(this, channel.getId())

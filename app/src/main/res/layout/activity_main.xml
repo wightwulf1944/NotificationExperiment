@@ -8,74 +8,53 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textChannelSettingsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Channel settings:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/indent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/space_medium" />
+
+    <TextView
         android:id="@+id/textImportanceLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_medium"
         android:text="importance:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/indent"
+        app:layout_constraintTop_toBottomOf="@id/textChannelSettingsLabel" />
 
     <TextView
         android:id="@+id/textImportance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/space_small"
         app:layout_constraintBottom_toBottomOf="@id/textImportanceLabel"
         app:layout_constraintStart_toEndOf="@id/textImportanceLabel"
         app:layout_constraintTop_toTopOf="@id/textImportanceLabel"
         tools:text="default" />
 
     <TextView
-        android:id="@+id/textShouldVibrateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="shouldVibrate:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textImportanceLabel" />
-
-    <TextView
-        android:id="@+id/textShouldVibrate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/textShouldVibrateLabel"
-        app:layout_constraintStart_toEndOf="@id/textShouldVibrateLabel"
-        app:layout_constraintTop_toTopOf="@id/textShouldVibrateLabel"
-        tools:text="false" />
-
-    <TextView
-        android:id="@+id/textLightsLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="shouldShowLights:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textShouldVibrateLabel" />
-
-    <TextView
-        android:id="@+id/textLights"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/textLightsLabel"
-        app:layout_constraintStart_toEndOf="@id/textLightsLabel"
-        app:layout_constraintTop_toTopOf="@id/textLightsLabel"
-        tools:text="false" />
-
-    <TextView
         android:id="@+id/textVibrateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_medium"
         android:text="vibrate: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textLightsLabel" />
+        app:layout_constraintStart_toStartOf="@id/indent"
+        app:layout_constraintTop_toBottomOf="@id/textImportanceLabel" />
 
     <RadioGroup
         android:id="@+id/radioGroupVibrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_small"
         android:checkedButton="@id/radioVibrateDefault"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@id/textVibrateLabel"
@@ -96,6 +75,46 @@
 
         <RadioButton
             android:id="@+id/radioVibrateOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="on" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textLightsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_medium"
+        android:text="lights:"
+        app:layout_constraintStart_toStartOf="@id/indent"
+        app:layout_constraintTop_toBottomOf="@id/textVibrateLabel" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupLights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_small"
+        android:checkedButton="@id/radioLightsDefault"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/textLightsLabel"
+        app:layout_constraintStart_toEndOf="@id/textLightsLabel"
+        app:layout_constraintTop_toTopOf="@id/textLightsLabel">
+
+        <RadioButton
+            android:id="@+id/radioLightsDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="default" />
+
+        <RadioButton
+            android:id="@+id/radioLightsOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="off" />
+
+        <RadioButton
+            android:id="@+id/radioLightsOn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="on" />
